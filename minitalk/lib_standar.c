@@ -76,16 +76,23 @@ int			ft_atoi(char *str)
 	return (signe * result);
 }
 
-int			ft_atoi_base(int n)
+char    *char_to_binary(int n)
 {
-	int i = 0;
+	int i;
+    char *word;
 
+    i = -1;
+    word = (char*)malloc(sizeof(char) * 9);
+    while(++i < 8)
+        word[i] = '0';
+    word[i] = 0;
+    i = -1;
 	while(n)
 	{
-		i = i*10 + n%2;
+		word[7 - (++i)] = '0' + n % 2;
 		n /= 2; 
 	}
-	return (i);	
+	return (word);	
 }
 
 char	*ft_strjoinn(char *s1, char *s2)
@@ -109,7 +116,6 @@ char	*ft_strjoinn(char *s1, char *s2)
 		while (i < s1_len)
 			res[j++] = s1[i++];
 		i = 0;
-		(*s1) ? res[j++] = '\n' : 0;
 		while (i < s2_len)
 			res[j++] = s2[i++];
 	}

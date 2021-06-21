@@ -24,13 +24,16 @@ int main(int ac, char **av)
 	{
 		msg = av[2];
 		// pid = ft_atoi(av[1]);
+		av += 2;
 		msg_binair = ft_strdup("");
-		while (*msg)
+		while (**av)
 		{
-			tmp = ft_strjoinn(msg_binair, ft_itoa(ft_atoi_base(*msg)));
+			msg = char_to_binary(**av);
+			tmp = ft_strjoinn(msg_binair, msg);
 			free(msg_binair);
+			free(msg);
 			msg_binair = tmp;
-			msg++;
+			(*av)++;
 		}
 		printf("%s\n", msg_binair);
 	}

@@ -23,10 +23,10 @@ void	ft_putchar(char c);
 void	ft_is_p_n(char c, int *i, int *signe);
 
 int		ft_atoi(char *str);
-int		ft_atoi_base(int n);
 int		ft_strlen(char *str);
 char	*ft_itoa(int n);
 char	*ft_strdup(char *src);
 char	*ft_strrev(char *str);
 char	*ft_strjoinn(char *s1, char *s2);
+char    *char_to_binary(int n);
 #endif 
