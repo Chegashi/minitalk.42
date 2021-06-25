@@ -29,4 +29,5 @@ char	*ft_strdup(char *src);
 char	*ft_strrev(char *str);
 char	*ft_strjoinn(char *s1, char *s2);
 char    *char_to_binary(int n);
+char		*str_to_binary(char *str);
 #endif 

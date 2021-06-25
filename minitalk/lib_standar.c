@@ -86,10 +86,15 @@ char    *char_to_binary(int n)
     while(++i < 8)
         word[i] = '0';
     word[i] = 0;
-    i = -1;
-	while(n)
+	if (n < 0)
+    {
+		*word = '1';
+        n *= -1;
+    }
+    i = 8;
+	while(n && i)
 	{
-		word[7 - (++i)] = '0' + n % 2;
+		word[--i] = '0' + n % 2;
 		n /= 2; 
 	}
 	return (word);	
@@ -176,7 +181,7 @@ void		ft_init(int *len, int *signe, unsigned int *c, int n)
 	*c = *signe * n;
 }
 
-char			*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	int				len;
 	int				signe;
@@ -199,7 +204,7 @@ char			*ft_itoa(int n)
 	return (res);
 }
 
-int	ft_strlen(char *str)
+int			ft_strlen(char *str)
 {
 	int		i;
 
@@ -209,7 +214,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strrev(char *str)
+char		*ft_strrev(char *str)
 {
 	int		len;
 	int		i;
@@ -227,4 +232,54 @@ char	*ft_strrev(char *str)
 		i++;
 	}
 	return (str);
+}
+
+char		*str_to_binary(char *str)
+{
+	char	*msg_binair;
+	char	*msg;
+	char 	*tmp;
+
+	msg_binair = ft_strdup("");
+	while (*str)
+	{
+	    msg = char_to_binary(*str);
+		tmp = ft_strjoinn(msg_binair, msg);
+		free(msg_binair);
+		free(msg);
+		msg_binair = tmp;
+		str++;
+	}
+	return(msg_binair);
+}
+
+int power(int n, int p)
+{
+    int result;
+
+    result = 1;
+    while (p--)
+       result *= n;
+    return (result);
+}
+
+int binary_to_char(char *str)
+{
+    int n;
+    int i;
+    int signe;
+
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] == '1')
+            signe = -1;
+        else
+            signe = 1;
+        n = 0;
+        while(str[++i] && (i % 8) != 0)
+            n += power(2,7 - i % 8) * (str[i] - '0');
+        n *= signe;
+    }
+    return (n);
 }

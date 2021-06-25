@@ -1,28 +1,50 @@
 #include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
 
-char    *char_to_binary(int n)
+int     ft_power(int i, int j)
 {
-	int i;
-    char *word;
+    int n;
 
-    i = -1;
-    word = (char*)malloc(sizeof(char) * 9);
-    while(++i < 8)
-        word[i] = '0';
-    word[i] = 0;
-    i = -1;
-	while(n)
-	{
-		word[7 - (++i)] = '0' + n % 2;
-		n /= 2; 
-	}
-	return (word);	
+    n = 1;
+    while(j--)
+        n *= i;
+    return (n);    
+}
+
+void     binary_to_char(char *msg)
+{
+    int n;
+    int i;
+    int signe;
+
+    while(*msg)
+    {
+        n = 0;
+        i = 7;
+        if (*msg++ > 0)
+            signe = 1;
+        else
+            signe = -1;
+        while (*msg && --i > 0)
+        {
+            printf("[%d]%c\n",n, *msg);
+            if (*msg == '1')
+                n += ft_power(2, i);
+            msg++;
+        }
+        n *= signe;
+        printf("%d", n);
+    }
 }
 
 int main()
 {
-    
-    printf("%s\n", char_to_binary(' '));
+    // char *a = strdup("abcdefjhi");
+    // while(*a) 
+    //     binary_to_char(char_to_binary(*a++));
+    //binary_to_char("01100001");
+    printf("%d", ft_power(2,5));
     return (0);
 }
