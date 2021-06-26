@@ -6,7 +6,7 @@
 /*   By: mochegri <mochegri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:58:12 by mochegri          #+#    #+#             */
-/*   Updated: 2021/06/26 16:00:05 by mochegri         ###   ########.fr       */
+/*   Updated: 2021/06/26 17:42:27 by mochegri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int	ft_atoi(char *s)
 		nbr = nbr * 10 + (*s - '0');
 		if ((*s < 48 && *s > 57) || (signe == 1 && nbr > 2147483647)
 			 || (signe == -1 && nbr > 2147483648))
+		{
+			write(1, "invalid pid\n", 13);
 			exit(1);
+		}
 		s++;
 	}
 	nbr *= signe;

@@ -6,7 +6,7 @@
 /*   By: mochegri <mochegri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 14:18:55 by mochegri          #+#    #+#             */
-/*   Updated: 2021/06/26 15:31:00 by mochegri         ###   ########.fr       */
+/*   Updated: 2021/06/26 17:24:44 by mochegri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	get_char(int n)
 		c = binary_to_char(msg);
 		write(1, &c, 1);
 		i = 0;
+		ft_memset(msg, 0, 9);
 	}
 }
 

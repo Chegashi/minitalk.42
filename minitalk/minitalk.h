@@ -6,7 +6,7 @@
 /*   By: mochegri <mochegri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 16:48:05 by mochegri          #+#    #+#             */
-/*   Updated: 2021/06/21 10:48:21 by mochegri         ###   ########.fr       */
+/*   Updated: 2021/06/26 17:46:01 by mochegri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,6 @@ int		power(int n, int p);
 int		binary_to_char(char *str);
 void	get_char(int n);
 void	*ft_memset(void *b, int c, size_t n);
+void	binary_to_signal(char *msg_binair, int pid);
+
 #endif 
