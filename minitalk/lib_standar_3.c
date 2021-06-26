@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   lib_standar_3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochegri <mochegri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/20 16:48:15 by mochegri          #+#    #+#             */
-/*   Updated: 2021/06/26 15:55:47 by mochegri         ###   ########.fr       */
+/*   Created: 2021/06/26 14:20:38 by mochegri          #+#    #+#             */
+/*   Updated: 2021/06/26 14:30:23 by mochegri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	main(int ac, char **av)
+char	*ft_strdup(char *src)
 {
-	char	*msg_binair;
+	char	*p;
 	int		i;
-	int		pid;
 
-	if (ac == 3)
+	i = 0;
+	p = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (p == 0)
+		return (0);
+	while (i < ft_strlen(src))
 	{
-		pid = ft_atoi(av[1]);
-		if (pid < 10)
-			exit(EXIT_FAILURE);
-		msg_binair = str_to_binary(av[2]);
-		i = -1;
-		while (msg_binair[++i])
-		{
-			if (msg_binair[i] == '1')
-				kill(pid, SIGUSR1);
-			if (msg_binair[i] == '0')
-				kill(pid, SIGUSR2);
-			usleep(100);
-		}
-		free(msg_binair);
+		p[i] = src[i];
+		i++;
 	}
-	return (0);
+	p[i] = '\0';
+	return (p);
+}
+
+int	ft_strlen(char *str)
+{
+	int		i;
+
+	i = -1;
+	while (str[++i] != '\0')
+		;
+	return (i);
 }

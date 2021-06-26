@@ -12,9 +12,9 @@
 
 #include "minitalk.h"
 
-int main()
+int	main(void)
 {
-	int pid;
+	int	pid;
 
 	pid = getpid();
 	if (pid < 0)
