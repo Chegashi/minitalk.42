@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+
 /*
-◦ sigemptyset
 ◦ sigaddset
 ◦ sigaction
 ◦ kill
@@ -51,6 +52,7 @@ int main(int ac, char **av)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
+			usleep(100);
 		}
 	}
 	return (0);

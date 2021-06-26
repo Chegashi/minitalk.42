@@ -14,17 +14,19 @@
 
 int main()
 {
-	ft_putnbr(getpid());
-	signal(SIGUSR1, sig_1);
-	signal(SIGUSR2, sig_2);
+	int pid;
+
+	pid = getpid();
+	if (pid < 0)
+	{
+		write(1, "invalid pid\n", 13);
+		exit(1);
+	}
+	ft_putnbr(pid);
+	write(1, "\n", 1);
+	signal(SIGUSR1, get_char);
+	signal(SIGUSR2, get_char);
 	while (1)
-		sleep(1);
-	// char *p;
-	// p = av[1];
-	// while (*p)
-	// {
-	// 	get_char((*p == '0') ? 0 : 1);
-	// 	p++;
-	// }
+		pause();
 	return (0);
 }

@@ -146,64 +146,6 @@ char	*ft_strdup(char *src)
 	return (p);
 }
 
-char		*ft_convert(int len, unsigned int c, char *res)
-{
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (c == 10)
-		{
-			res[i++] = '0';
-			res[i++] = '1';
-		}
-		else
-		{
-			res[i++] = '0' + (c % 10);
-			c /= 10;
-		}
-	}
-	res[i] = '\0';
-	return (res);
-}
-
-void		ft_init(int *len, int *signe, unsigned int *c, int n)
-{
-	*len = 1;
-	*signe = (n < 0) ? -1 : 1;
-	*c = *signe * n;
-	while (*c / 10)
-	{
-		(*len)++;
-		*c /= 10;
-	}
-	*c = *signe * n;
-}
-
-char		*ft_itoa(int n)
-{
-	int				len;
-	int				signe;
-	char			*res;
-	char			*res1;
-	unsigned int	c;
-
-	ft_init(&len, &signe, &c, n);
-	res = (char*)malloc(sizeof(char) * (len + 2));
-	if (!res)
-		return (NULL);
-	if (n < 0)
-	{
-		res[0] = '-';
-		res1 = res + 1;
-		res1 = ft_strrev((ft_convert(len, c, res1)));
-	}
-	else
-		res = ft_strrev((ft_convert(len, c, res)));
-	return (res);
-}
-
 int			ft_strlen(char *str)
 {
 	int		i;
@@ -212,45 +154,6 @@ int			ft_strlen(char *str)
 	while (str[++i] != '\0')
 		;
 	return (i);
-}
-
-char		*ft_strrev(char *str)
-{
-	int		len;
-	int		i;
-	char	tmp;
-
-	i = 0;
-	len = 0;
-	while ((str[len]) != '\0')
-		len++;
-	while (i < (len / 2))
-	{
-		tmp = str[i];
-		str[i] = str[len - 1 - i];
-		str[len - 1 - i] = tmp;
-		i++;
-	}
-	return (str);
-}
-
-char		*str_to_binary(char *str)
-{
-	char	*msg_binair;
-	char	*msg;
-	char 	*tmp;
-
-	msg_binair = ft_strdup("");
-	while (*str)
-	{
-	    msg = char_to_binary(*str);
-		tmp = ft_strjoinn(msg_binair, msg);
-		free(msg_binair);
-		free(msg);
-		msg_binair = tmp;
-		str++;
-	}
-	return(msg_binair);
 }
 
 int power(int n, int p)
@@ -284,29 +187,39 @@ int binary_to_char(char *str)
     return (n);
 }
 
-void sig_1(int n)
-{
-	// get_char(1);
-	printf("{%d}1\n",n);
-}
-
-void sig_2(int n)
-{
-	// get_char(2);
-	printf("{%d}0\n",n);
-}
-
 void	get_char(int n)
 {
 	static int i = 0;
 	static char msg[9];
 	char c;
 
-	msg[8] = 0;
-	msg[i++] = '0' + n;
+	if (!i)
+		ft_memset(msg, 0, 9);
+	if ( n == SIGUSR1)
+		msg[i++] = '1';
+	if (n == SIGUSR2)
+		msg[i++] = '0';
 	if (i == 8)
 	{
 		c = binary_to_char(msg);
 		write(1, &c, 1);
+		i = 0;
 	}
 } 
+
+void		*ft_memset(void *b, int c, size_t n)
+{
+	int				i;
+	unsigned char	m;
+	unsigned char	*str;
+
+	i = 0;
+	str = b;
+	m = (unsigned char)c;
+	while (i < (int)n)
+	{
+		*(str++) = m;
+		i++;
+	}
+	return (b);
+}
