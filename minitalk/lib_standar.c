@@ -283,3 +283,30 @@ int binary_to_char(char *str)
     }
     return (n);
 }
+
+void sig_1(int n)
+{
+	// get_char(1);
+	printf("{%d}1\n",n);
+}
+
+void sig_2(int n)
+{
+	// get_char(2);
+	printf("{%d}0\n",n);
+}
+
+void	get_char(int n)
+{
+	static int i = 0;
+	static char msg[9];
+	char c;
+
+	msg[8] = 0;
+	msg[i++] = '0' + n;
+	if (i == 8)
+	{
+		c = binary_to_char(msg);
+		write(1, &c, 1);
+	}
+} 

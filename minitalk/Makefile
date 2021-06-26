@@ -14,9 +14,7 @@ NAME = minitalk
 
 flags = -Wall -Wextra -Werror
 
-SRCS =	server.c \
-		client.c \
-		lib_standar.c\
+SRCS =	lib_standar.c \
 
 MAND = $(SRCS)
 
@@ -37,6 +35,7 @@ clean:
 fclean:	clean
 	@rm -rf client
 	@rm -rf server
+	@rm -rf *.o
 	@rm -rf minitalk.a
 
 re:		fclean all

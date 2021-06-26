@@ -15,7 +15,16 @@
 int main()
 {
 	ft_putnbr(getpid());
+	signal(SIGUSR1, sig_1);
+	signal(SIGUSR2, sig_2);
 	while (1)
-	;
+		sleep(1);
+	// char *p;
+	// p = av[1];
+	// while (*p)
+	// {
+	// 	get_char((*p == '0') ? 0 : 1);
+	// 	p++;
+	// }
 	return (0);
 }

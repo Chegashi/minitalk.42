@@ -11,19 +11,28 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
+/*
+◦ sigemptyset
+◦ sigaddset
+◦ sigaction
+◦ kill
+◦ pause
+◦ sleep
+◦ usleep
+*/
 
 int main(int ac, char **av)
 {
 	char	*msg;
 	char	*msg_binair;
 	char 	*tmp;
-	// char	char_1;
-	// int		pid;
+	int 	i;
+	int		pid;
 	
 	if (ac == 3)
 	{
 		msg = av[2];
-		// pid = ft_atoi(av[1]);
+		pid = ft_atoi(av[1]);
 		av += 2;
 		msg_binair = ft_strdup("");
 		while (**av)
@@ -35,7 +44,14 @@ int main(int ac, char **av)
 			msg_binair = tmp;
 			(*av)++;
 		}
-		printf("%s\n", msg_binair);
+		i = -1;
+		while (msg_binair[++i])
+		{
+			if (msg_binair[i] == '1')
+				kill(pid, SIGUSR1);
+			else
+				kill(pid, SIGUSR2);
+		}
 	}
 	return (0);
 }
